@@ -14,11 +14,12 @@ public class PersonCellRenderer extends JLabel implements ListCellRenderer {
     	if (value instanceof Person) {
     		Person person = (Person) value;
     		String name = person.getName();
-    		String email = person.getEmail();
-    		String bday = person.getDateOfBirth();
-    		String gender = person.getGender().toString();
-    		String height = Integer.toString(person.getHeight());
-    		setText("Name: " + name +  " | Email: " + email + " | BDay: " + bday + " | Gender: " + gender + " | Height: " + height);
+//    		String email = person.getEmail();
+//    		String bday = person.getDateOfBirth();
+//    		String gender = person.getGender().toString();
+//    		String height = Integer.toString(person.getHeight());
+    		setText(name);
+    		//+ " | BDay: " + bday + " | Gender: " + gender + " | Height: " + height
     	}
         
         if (isSelected) {

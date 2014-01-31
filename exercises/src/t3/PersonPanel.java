@@ -18,11 +18,11 @@ import javax.swing.event.ChangeListener;
 
 public class PersonPanel extends JPanel implements PropertyChangeListener {
 	
-	JTextField NamePropertyComponent;
-	JTextField EmailPropertyComponent;
-	JTextField DateOfBirthPropertyComponent;
-	JComboBox GenderPropertyComponent;
-	JSlider HeightPropertyComponent;
+	public JTextField NamePropertyComponent;
+	public JTextField EmailPropertyComponent;
+	public JTextField DateOfBirthPropertyComponent;
+	public JComboBox GenderPropertyComponent;
+	public JSlider HeightPropertyComponent;
 	GridBagLayout layout;
 	GridBagConstraints c;
 	

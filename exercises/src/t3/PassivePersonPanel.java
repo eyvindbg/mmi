@@ -4,13 +4,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.beans.PropertyChangeEvent;
 
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class PassivePersonPanel extends PersonPanel {
 	
 	
-	private JTextField GenderPC;
-	private JTextField HeightPC;
+	public JTextField GenderPC;
+	public JTextField HeightPC;
 
 	public PassivePersonPanel() {
 		super();
@@ -25,23 +26,28 @@ public class PassivePersonPanel extends PersonPanel {
 //		setLayout(new GridBagLayout());
 //		GridBagConstraints c = new GridBagConstraints();
 		
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 3;
+		add(new JLabel("Gender"), c);
 		
 		GenderPC = new JTextField();
 		GenderPC.setName("GenderPC");
 		GenderPC.setColumns(20);
 		GenderPC.setEditable(false);
 		
+		c.gridx = 1;
 		add(GenderPC, c);
 		
-		c.gridx = 1;
+		c.gridx = 0;
 		c.gridy = 4;
+		add(new JLabel("Height"), c);
 		
 		HeightPC = new JTextField();
 		HeightPC.setName("HeightPC");
 		HeightPC.setColumns(20);
 		HeightPC.setEditable(false);
+		
+		c.gridx = 1;
 		add(HeightPC, c);
 		
 	}
