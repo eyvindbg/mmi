@@ -54,9 +54,7 @@ public class PassivePersonPanel extends PersonPanel {
 	
 	public void setModel(Person p) {
 		super.setModel(p);
-		System.out.println(model.getGender().toString());
 		GenderPC.setText(model.getGender().toString());
-		System.out.println(Integer.toString(model.getHeight()));
 		HeightPC.setText(Integer.toString(model.getHeight()));
 		
 		

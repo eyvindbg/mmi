@@ -3,11 +3,14 @@ package t4;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
@@ -20,6 +23,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -40,7 +44,7 @@ public class PersonListPanel extends JPanel {
 	private JButton addButton;
 	private JButton deleteButton;
 	
-	private DefaultListModel model;
+	private DefaultListModel<Person> model;
 	private DefaultListSelectionModel personListSelectionModel;
 	
 	private GridBagLayout layout;
@@ -50,9 +54,9 @@ public class PersonListPanel extends JPanel {
 		layout = new GridBagLayout();
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		setLayout(layout);
+		setLayout(new FlowLayout());
 		
-		model = new DefaultListModel();
+		model = new DefaultListModel<Person>();
 		personList = new JList<Person>(model);
 		
 		addButton = new JButton("Add");
@@ -78,34 +82,42 @@ public class PersonListPanel extends JPanel {
 		gbc.gridy = 0;
 		add(scrollPane, gbc);
 		
-		personPanel = new PersonPanel();
-		personPanel.setName("PersonPanel");
+	
 		
 		
 		gbc.gridx = 1;
-		add(personPanel, gbc);
+		
 		
 		passivePanel = new PassivePersonPanel();
 		gbc.gridy = 1;
 		gbc.gridx = 0;
 		add(passivePanel, gbc);
 		
+		add(Box.createHorizontalStrut(5));
+		add(new JSeparator(SwingConstants.VERTICAL));
+		
+		personPanel = new PersonPanel();
+		personPanel.setName("PersonPanel");
+		add(personPanel, gbc);
+		
 		gbc.gridy = 1;
 		gbc.gridx = 1;
-		gbc.weighty = 0.5;
+		gbc.gridwidth = 2;
 		gbc.ipady = 15;
 		add(addButton, gbc);
 		
 		
-		gbc.weighty = 0.5;
+
 		gbc.gridx = 1;
 		add(deleteButton, gbc);
 		
-		Person person1 = createPerson("Rollf", "rolfern@gui.zz", "1. Jan 1000", Gender.MALE, 200);
-		Person person2 = createPerson("Svetlana", "sap@spa.com", "35. Apr 1999", Gender.FEMALE, 150);
+		Person person1 = createPerson("Eksempel Eksempelsen", "example@eksempel.no", "1. Jan 1980", Gender.MALE, 200);
+		Person person2 = createPerson("Svetlana Krushnikova", "krushnikova@russland.ru", "31. Apr 1899", Gender.FEMALE, 150);
+		Person person3 = createPerson("Roger Hansen", "hansen@epost.com", "24. Des 1976", Gender.MALE, 183);
 		
 		model.addElement(person1);
 		model.addElement(person2);
+		model.addElement(person3);
 		
 		personList.addListSelectionListener(new PersonListSelectionListener());
 		
@@ -148,8 +160,16 @@ public class PersonListPanel extends JPanel {
 
     	@Override
     	public void actionPerformed(ActionEvent arg0) {
-    		String name = personPanel.NamePropertyComponent.getText();
     		String email = personPanel.EmailPropertyComponent.getText();
+    		
+    		for (int i = 0; i < model.getSize(); i++) {
+    			if (model.getElementAt(i).getEmail().equals(email)) {
+    				System.out.println("Person is already in the list.");
+    				return;
+    			}
+    		}
+    		
+    		String name = personPanel.NamePropertyComponent.getText();
     		String bday = personPanel.DateOfBirthPropertyComponent.getText();
     		int g = personPanel.GenderPropertyComponent.getSelectedIndex();
     		int height = personPanel.HeightPropertyComponent.getValue();
